@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Scene test</title>
+<script type="importmap">{"imports":{"three":"../assets/vendor/three.module.min.js","three/addons/":"../assets/vendor/addons/"}}</script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Manrope:wght@600;700&display=swap">
+<style>body{margin:0;background:#f7f4ef;font-family:Manrope,sans-serif}#stage{width:900px;height:700px;margin:30px auto;border-radius:24px;overflow:hidden;background:radial-gradient(70% 60% at 62% 32%,#fbe4e3,#f7f4ef 70%)}canvas{display:block;width:100%!important;height:100%!important}#info{text-align:center;color:#8a847f;font-size:13px}</style></head>
+<body><div id="stage"></div><p id="info"></p>
+<script>
+  // Usage: /assets/_scenetest.html?scene=lens&photo=/assets/img/stock/p12813050-1600.webp&reflect=1&w=900&h=700
+  const q = new URLSearchParams(location.search); const el = document.getElementById('stage'); el.className = 'scene';
+  el.dataset.scene = q.get('scene') || 'plate';
+  for (const [k, v] of q) if (!['scene', 'w', 'h'].includes(k)) el.dataset[k] = v;
+  if (!el.dataset.photo) el.dataset.photo = '/assets/img/stock/p326514-1600.jpg';
+  if (q.get('w')) el.style.width = q.get('w') + 'px'; if (q.get('h')) el.style.height = q.get('h') + 'px';
+  document.getElementById('info').textContent = 'scene=' + el.dataset.scene + ' ' + JSON.stringify({ ...el.dataset });
+  window.addEventListener('error', e => { document.getElementById('info').textContent += ' ERROR: ' + e.message; });
+</script>
+<script type="module" src="../js/scenes.js"></script>
+</body></html>

@@ -1,0 +1,3 @@
+<FilesMatch "^(config\.php|config\.sample\.php|submissions\.jsonl)$">
+Require all denied
+</FilesMatch>
